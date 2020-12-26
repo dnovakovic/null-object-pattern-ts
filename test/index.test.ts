@@ -9,20 +9,20 @@ describe('Test purchases', () => {
     afterEach(() => {
     });
 
-    it('Old school: prevent purchase in case of no wallet', () => {
+    it('01.Old school: prevent purchase in case of no wallet', () => {
         const Michael = new Person(new VoidWallet());
         if (Michael.wallet) {
             Michael.purchase(Present.Bicycle())
         }
         expect(Michael.hasPurchased).toBeFalsy();
     })
-    it('New school: nothing blows up even without wallet', () => {
+    it('02.New school: nothing blows up even without wallet', () => {
         const Michael = new Person(new VoidWallet());
         Michael.purchase(Present.Bicycle())
         expect(Michael.hasPurchased).toBeFalsy();
     })
 
-    it('Further more, passing null reference for wallet will break the app', () => {
+    it('03.Further more, passing null reference for wallet will break the app', () => {
         const scenario = () => {
             const Michael = new Person(null);
             if (Michael.wallet) {
@@ -32,15 +32,15 @@ describe('Test purchases', () => {
         expect(scenario).toThrow(ReferenceError);
     })
 
-    it('With cash wallet.', () => {
+    it('04.With cash wallet.', () => {
         const Michael = new Person(new CashWallet());
         Michael.purchase(Present.Bicycle())
         expect(Michael.hasPurchased).toBeTruthy();
     });
 
-    it('With electronic wallet.', () => {
+    it('05.With electronic wallet.', () => {
         const Michael = new Person(new ElectronicWallet());
-        Michael.purchase(Present.Bicycle())
+        Michael.purchase(Present.Mobile())
         expect(Michael.hasPurchased).toBeTruthy();
     });
 });
