@@ -6,6 +6,9 @@ export class Person {
     private _hasPurchased: boolean;
 
     constructor(wallet: IWallet) {
+        if (wallet == null) {
+            throw new ReferenceError('Null is not allowed as reference to wallet');
+        }
         this._wallet = wallet;
         this._hasPurchased = false;
     }
